@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Thank You - Farewell Page</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <style>
+    :root {
+      --bg: #050816;
+      --card: #0b1020;
+      --accent: #6366f1;
+      --accent-soft: rgba(99, 102, 241, 0.12);
+      --text: #e5e7eb;
+      --muted: #9ca3af;
+      --border: rgba(148, 163, 184, 0.3);
+      --radius: 18px;
+      --shadow: 0 22px 50px rgba(0,0,0,0.75);
+      --transition: all 0.22s ease;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at top left, #111827, #020617 55%, #000 100%);
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 18px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .bg-orb {
+      position: fixed;
+      width: 420px;
+      height: 420px;
+      border-radius: 999px;
+      background: radial-gradient(circle, rgba(99,102,241,0.55), transparent 60%);
+      filter: blur(2px);
+      opacity: 0.65;
+      z-index: -2;
+      animation: float 16s ease-in-out infinite alternate;
+    }
+    .bg-orb.orb-2 {
+      background: radial-gradient(circle, rgba(236,72,153,0.5), transparent 60%);
+      width: 360px;
+      height: 360px;
+      top: auto;
+      bottom: -120px;
+      left: auto;
+      right: -80px;
+      animation-duration: 22s;
+    }
+    @keyframes float {
+      from { transform: translate(-120px, -60px); }
+      to   { transform: translate(40px, 80px); }
+    }
+
+    .wrapper {
+      max-width: 860px;
+      width: 100%;
+      background: radial-gradient(circle at top left, rgba(15,23,42,0.95), rgba(5,6,15,0.99));
+      border-radius: 26px;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .top-strip {
+      height: 4px;
+      background: linear-gradient(90deg, #6366f1, #ec4899, #22c55e, #f97316, #6366f1);
+      background-size: 200% 100%;
+      animation: stripMove 12s linear infinite;
+    }
+
+    @keyframes stripMove {
+      from { background-position: 0% 50%; }
+      to   { background-position: 200% 50%; }
+    }
+
+    .content {
+      padding: 24px 24px 20px;
+      display: grid;
+      grid-template-columns: minmax(0, 2.2fr) minmax(0, 1.4fr);
+      gap: 22px;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 11px;
+      padding: 5px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(148,163,184,0.7);
+      background: rgba(15,23,42,0.9);
+      color: var(--muted);
+      margin-bottom: 10px;
+    }
+    .badge-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: #22c55e;
+      box-shadow: 0 0 10px rgba(34,197,94,0.9);
+    }
+
+    h1 {
+      font-size: 30px;
+      line-height: 1.2;
+      margin-bottom: 6px;
+    }
+    h1 span.highlight {
+      background: linear-gradient(120deg, #6366f1, #ec4899);
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .subtitle {
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 16px;
+    }
+
+    .main-message {
+      font-size: 14px;
+      line-height: 1.7;
+      color: #e5e7eb;
+      margin-bottom: 14px;
+    }
+
+    .section-title {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--muted);
+      margin-top: 10px;
+      margin-bottom: 4px;
+    }
+
+    .thank-list {
+      margin-left: 0;
+      list-style: none;
+      font-size: 13px;
+      color: #d1d5db;
+    }
+    .thank-list li {
+      padding: 4px 0;
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+    }
+    .thank-list li::before {
+      content: "•";
+      margin-top: 2px;
+      color: #818cf8;
+    }
+
+    .closing {
+      margin-top: 14px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .name-line {
+      margin-top: 4px;
+      font-size: 15px;
+      font-weight: 600;
+      color: #e5e7eb;
+    }
+
+    .side-card {
+      background: radial-gradient(circle at top, rgba(15,23,42,0.9), rgba(15,23,42,1));
+      border-radius: var(--radius);
+      border: 1px solid rgba(148,163,184,0.35);
+      padding: 14px 14px 12px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .side-card::before {
+      content: "";
+      position: absolute;
+      inset: -40%;
+      background:
+        radial-gradient(circle at 0% 0%, rgba(99,102,241,0.38), transparent 60%),
+        radial-gradient(circle at 100% 0%, rgba(236,72,153,0.38), transparent 60%);
+      opacity: 0.8;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .avatar-circle {
+      width: 64px;
+      height: 64px;
+      border-radius: 999px;
+      border: 2px solid rgba(148,163,184,0.7);
+      display: grid;
+      place-items: center;
+      background: radial-gradient(circle at 30% 20%, #e5e7eb, #4f46e5);
+      font-weight: 700;
+      font-size: 22px;
+      margin-bottom: 8px;
+    }
+
+    .role-line {
+      font-size: 12px;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+
+    .pill-soft {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      padding: 4px 9px;
+      border-radius: 999px;
+      border: 1px solid rgba(129,140,248,0.7);
+      background: rgba(15,23,42,0.95);
+      margin-bottom: 10px;
+    }
+    .pill-soft small {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--muted);
+    }
+
+    .quote-box {
+      font-size: 12px;
+      line-height: 1.6;
+      color: #d1d5db;
+      background: rgba(15,23,42,0.9);
+      border-radius: 12px;
+      padding: 10px;
+      border: 1px dashed rgba(148,163,184,0.6);
+      margin-bottom: 10px;
+    }
+    .quote-mark {
+      font-size: 18px;
+      opacity: 0.6;
+      margin-right: 4px;
+    }
+
+    .small-label {
+      font-size: 11px;
+      color: var(--muted);
+      margin-bottom: 4px;
+    }
+
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 10px;
+    }
+
+    .chip {
+      font-size: 11px;
+      padding: 4px 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(148,163,184,0.7);
+      background: rgba(15,23,42,0.96);
+      color: var(--text);
+    }
+
+    .contact-box {
+      padding: 8px 9px;
+      border-radius: 12px;
+      border: 1px solid rgba(148,163,184,0.7);
+      background: rgba(15,23,42,0.96);
+      margin-bottom: 8px;
+      font-size: 12px;
+      display: none;
+    }
+
+    .contact-line {
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+      margin: 3px 0;
+    }
+
+    .contact-line span {
+      word-break: break-all;
+    }
+
+    .btn-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 2px;
+    }
+
+    button {
+      font-family: inherit;
+    }
+
+    .btn-main,
+    .btn-ghost {
+      font-size: 12px;
+      padding: 7px 12px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: var(--transition);
+      background: transparent;
+      color: var(--text);
+    }
+
+    .btn-main {
+      background: linear-gradient(135deg, #6366f1, #ec4899);
+      box-shadow: 0 12px 28px rgba(79,70,229,0.7);
+    }
+    .btn-main:hover {
+      filter: brightness(1.08);
+      transform: translateY(-1px);
+    }
+
+    .btn-ghost {
+      border-color: rgba(148,163,184,0.7);
+      background: rgba(15,23,42,0.95);
+      color: var(--muted);
+    }
+    .btn-ghost:hover {
+      border-color: #818cf8;
+      color: #e5e7eb;
+      transform: translateY(-1px);
+    }
+
+    .footer-line {
+      border-top: 1px solid rgba(15,23,42,0.9);
+      padding: 10px 20px 12px;
+      font-size: 11px;
+      color: var(--muted);
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      background: rgba(3,7,18,0.94);
+    }
+
+    .heart {
+      display: inline-block;
+      animation: pulse 1.6s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%,100% { transform: scale(1); opacity: 0.9; }
+      50%     { transform: scale(1.2); opacity: 1; }
+    }
+
+    .toast {
+      position: fixed;
+      bottom: 16px;
+      right: 16px;
+      padding: 8px 11px;
+      border-radius: 999px;
+      font-size: 11px;
+      background: rgba(15,23,42,0.98);
+      border: 1px solid rgba(148,163,184,0.7);
+      color: #e5e7eb;
+      display: none;
+      align-items: center;
+      gap: 6px;
+      z-index: 20;
+      box-shadow: 0 12px 26px rgba(0,0,0,0.7);
+    }
+    .toast-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: #22c55e;
+    }
+
+    @media (max-width: 720px) {
+      .content {
+        grid-template-columns: 1fr;
+        padding: 20px 18px 16px;
+      }
+      h1 {
+        font-size: 24px;
+      }
+      .footer-line {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="bg-orb"></div>
+<div class="bg-orb orb-2"></div>
+
+<div class="wrapper">
+  <div class="top-strip"></div>
+
+  <div class="content">
+    <!-- LEFT SIDE : MAIN MESSAGE -->
+    <section>
+      <div class="badge">
+        <span class="badge-dot"></span>
+        Farewell Note • Thank you everyone
+      </div>
+
+      <h1>
+        Thank you, <span class="highlight">Startek Family</span> 💙
+      </h1>
+
+      <p class="subtitle">
+        As I move on from <strong>Process / Team Name</strong>, I wanted to keep one small page
+        to say a genuine and heartfelt <strong>thank you</strong> to everyone who was part of this journey.
+      </p>
+
+      <p class="main-message">
+        When I first joined, it felt like just another job. Now, as I exit, I realise it was
+        so much more than that. It became a chapter filled with <strong>people, learning, growth,
+        and memories</strong>. Every shift, every call, every huddle and every conversation has
+        contributed to who I am today.
+      </p>
+
+      <p class="main-message">
+        We handled tough days, changing targets, audits, client expectations and all kinds of ups
+        and downs together. Thank you for standing beside me, for supporting me, and for making
+        even the busiest days feel lighter.
+      </p>
+
+      <div class="section-title">Special thanks</div>
+      <ul class="thank-list">
+        <li>
+          <strong>Deepika Ma’am:</strong> A very special thank you for always supporting us, guiding us
+          with patience, and believing in our potential. Your encouragement made a huge difference
+          in our journey, and I will always be grateful for that.
+        </li>
+        <li>
+          <strong>My Manager / TL:</strong> For your guidance, feedback and trust which helped me improve
+          and grow every single day.
+        </li>
+        <li>
+          <strong>My teammates:</strong> For the backup, the laughs, the shared stress and the teamwork
+          that turned colleagues into friends.
+        </li>
+        <li>
+          <strong>Support teams (QA / WFM / Trainers / HR):</strong> For all the work you do in the
+          background so that our day on the floor runs smoother.
+        </li>
+      </ul>
+
+      <p class="closing">
+        I may be exiting the company, but I am <strong>not disconnecting from the people</strong>.
+        If you ever want to connect – for work, references, help, or just a random conversation –
+        you can reach out to me anytime using the details on this page.
+      </p>
+
+      <p class="name-line">— Your Name</p>
+    </section>
+
+    <!-- RIGHT SIDE : PROFILE / CONTACT -->
+    <aside class="side-card">
+      <!-- Put your initials inside this circle, e.g. YN -->
+      <div class="avatar-circle">YN</div>
+
+      <div style="font-size: 15px; font-weight: 600; margin-bottom: 2px;">
+        Your Name
+      </div>
+      <div class="role-line">
+        Former <strong style="color:#e5e7eb;">Role / Process Name</strong> at Startek
+      </div>
+
+      <div class="pill-soft">
+        🌟
+        <span>Grateful for the journey</span>
+        <small>202X – 202X</small>
+      </div>
+
+      <div class="quote-box">
+        <span class="quote-mark">“</span>
+        Thank you for every login, every shift, every effort and every bit of support.
+        It all mattered more than you know.
+      </div>
+
+      <div class="small-label">Some memories in one line</div>
+      <div class="chips">
+        <span class="chip">First day on the floor</span>
+        <span class="chip">Feedback & coaching sessions</span>
+        <span class="chip">Targets achieved together</span>
+        <span class="chip">Break-time talks & jokes</span>
+      </div>
+
+      <div class="small-label">Stay connected</div>
+
+      <div class="contact-box" id="contactBox">
+        <!-- Replace with your real details -->
+        <div class="contact-line">
+          <span>Email</span>
+          <span><strong>your.email@example.com</strong></span>
+        </div>
+        <div class="contact-line">
+          <span>Phone</span>
+          <span><strong>+91-XXXXXXXXXX</strong></span>
+        </div>
+        <div class="contact-line">
+          <span>LinkedIn</span>
+          <span><strong>linkedin.com/in/yourprofile</strong></span>
+        </div>
+      </div>
+
+      <div class="btn-row">
+        <button class="btn-main" id="toggleContact">
+          🤝 Show contact details
+        </button>
+        <button class="btn-ghost" id="copyLink">
+          🔗 Copy this page link
+        </button>
+      </div>
+    </aside>
+  </div>
+
+  <div class="footer-line">
+    <span>Made with <span class="heart">💜</span> and gratitude on my exit day.</span>
+    <span>You were a part of my journey – thank you for everything.</span>
+  </div>
+</div>
+
+<div class="toast" id="toast">
+  <span class="toast-dot"></span>
+  <span id="toastText">Copied!</span>
+</div>
+
+<script>
+  function showToast(msg) {
+    const toast = document.getElementById("toast");
+    const text = document.getElementById("toastText");
+    text.textContent = msg;
+    toast.style.display = "flex";
+    clearTimeout(showToast._t);
+    showToast._t = setTimeout(() => {
+      toast.style.display = "none";
+    }, 2200);
+  }
+
+  const toggleBtn = document.getElementById("toggleContact");
+  const contactBox = document.getElementById("contactBox");
+  let contactVisible = false;
+
+  toggleBtn.addEventListener("click", () => {
+    contactVisible = !contactVisible;
+    contactBox.style.display = contactVisible ? "block" : "none";
+    toggleBtn.textContent = contactVisible
+      ? "🙈 Hide contact details"
+      : "🤝 Show contact details";
+  });
+
+  const copyBtn = document.getElementById("copyLink");
+  copyBtn.addEventListener("click", async () => {
+    try {
+      await navigator.clipboard.writeText(window.location.href);
+      showToast("Page link copied. Share it with your team 💌");
+    } catch (e) {
+      showToast("Copy failed. Please copy the URL manually 🙂");
+    }
+  });
+</script>
+</body>
+</html>
